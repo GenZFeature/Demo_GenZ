@@ -3,7 +3,7 @@ package com.bnpp.utilities;
 public class Configurations {
 
 	// DriverPaths and Run on browser parameter
-	public static final String ExecutionEnvnmt = "load"; // Valid values: intacc1, intacc2, load
+	public static final String ExecutionEnvnmt = "load1"; // Valid values: intacc1, intacc2, load
 	public static final String BrowserName = "Chrome";
 
 	public final static String chromeDriverPath = "./src/test/Resources/Drivers/chromedriver.exe";
@@ -13,8 +13,10 @@ public class Configurations {
 
 	// Application URL
 	public final static String AppurlLoad = "https://load1-de.consorsbank.de/home";
+	public final static String AppurlLoad1 = "https://www.flipkart.com";
 	public final static String AppurlEnv2 = "https://int-acc-ewev-2.consorsbank.de/home";
 	public final static String AppurlEnv1 = "https://int-acc-ewev.consorsbank.de/home";
+	
 	// Test Data source path
 	public final static String testDataResourcePath = "../src/test/java/com/bnpp/TestData/";
 

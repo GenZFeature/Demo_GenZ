@@ -114,7 +114,7 @@ public class CommonActions {
 	 */
 	public void launchBrowser() throws MalformedURLException {
 		try {
-			if ((Configurations.RunOnBrowserStack).equals("Y")) {
+			if ((Configurations.RunOnBrowserStack).equals("N")) {
 				setUp();
 			} else {
 				if ((Configurations.BrowserName).equals("Chrome")) {
@@ -141,6 +141,11 @@ public class CommonActions {
 				driver.get(Configurations.AppurlLoad);
 				logInfoStatus("Info | Environment Name: " + Configurations.AppurlLoad);
 			}
+			if (Configurations.ExecutionEnvnmt.equalsIgnoreCase("load1")) {
+				driver.get(Configurations.AppurlLoad1);
+				logInfoStatus("Info | Environment Name: " + Configurations.AppurlLoad1);
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Invalid browser name or configuration");
@@ -829,6 +834,23 @@ public class CommonActions {
 					// System.out.println(pair.getKey() + ":" +
 				}
 			}
+			
+			else if (Configurations.ExecutionEnvnmt.equalsIgnoreCase("load1")) {
+
+				JSONObject getFeatureName = (JSONObject) parser
+						.parse(new FileReader("./src/test/java/com/bnpp/testdata/load1/" + featurename + ".json"));
+				JSONObject featureName = (JSONObject) getFeatureName.get(featurename);
+				Map<String, String> getScenarioName = (Map<String, String>) featureName.get(scenarioname);
+				Iterator it = getScenarioName.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry pair = (Map.Entry) it.next();
+					if (pair.getKey().toString().equals(dataKey)) {
+						data = pair.getValue().toString();
+						break;
+					}
+					// System.out.println(pair.getKey() + ":" +
+				}
+			}
 			return data;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -878,6 +900,24 @@ public class CommonActions {
 			} else if (Configurations.ExecutionEnvnmt.equalsIgnoreCase("load")) {
 				JSONObject getFeatureName = (JSONObject) parser
 						.parse(new FileReader("./src/test/java/com/bnpp/testdata/load/" + featurename + ".json"));
+				JSONObject featureName = (JSONObject) getFeatureName.get(featurename);
+				JSONObject scenario = (JSONObject) featureName.get(scenarioname);
+				Map<String, String> getmessagename = (Map<String, String>) scenario.get("ErrorMesssages");
+				Iterator it = getmessagename.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry pair = (Map.Entry) it.next();
+					if (pair.getKey().toString().equals(messageKey)) {
+						data = pair.getValue().toString();
+						break;
+					}
+					// System.out.println(pair.getKey() + ":" +
+					// pair.getValue().toString());
+				}
+			}
+			
+			else if (Configurations.ExecutionEnvnmt.equalsIgnoreCase("load1")) {
+				JSONObject getFeatureName = (JSONObject) parser
+						.parse(new FileReader("./src/test/java/com/bnpp/testdata/load1/" + featurename + ".json"));
 				JSONObject featureName = (JSONObject) getFeatureName.get(featurename);
 				JSONObject scenario = (JSONObject) featureName.get(scenarioname);
 				Map<String, String> getmessagename = (Map<String, String>) scenario.get("ErrorMesssages");
